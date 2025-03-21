@@ -105,5 +105,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function displayProcessedFiles(filenames) {
+        uploadSection.style.display = 'none';
+        strengthSliderSection.style.display = 'none';
 
+        previewContainer.innerHTML = '';
+        qrCodeContainer.innerHTML = '';
+
+        qrCodeSection.style.display = 'block';
+
+        // 生成 QR Code
+        filenames.forEach((filename) => {
+            const fileUrl = `${API_BASE_URL}/download/${encodeURIComponent(filename)}`;
+            console.log('Generating QR Code for:', fileUrl);
+
+            const qrCanvas = document.createElement('canvas');
+            qrCodeContainer.appendChild(qrCanvas);
+
+            QRCode.toCanvas(qrCanvas, fileUrl, (error) => {
+                if (error) {
+                    console.error('QR Code generation failed for URL:', fileUrl, error);
+                    alert(`Failed to generate QR Code for: ${fileUrl}`);
+                } else {
+                    console.log('QR Code generated successfully for URL:', fileUrl);
+                }
+            });
+
+            // 加入下載按鈕
+            const downloadBtn = document.createElement('a');
+            downloadBtn.textContent = `Download ${filename}`;
+            downloadBtn.href = fileUrl;
+            downloadBtn.download = true;
+            downloadBtn.classList.add('stylish-btn');
+            qrCodeContainer.appendChild(downloadBtn);
+
+            qrCodeContainer.appendChild(document.createElement('br'));
+        });
+    }
+    
 });
