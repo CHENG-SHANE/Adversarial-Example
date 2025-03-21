@@ -250,3 +250,21 @@ body {
     50% { transform: scale(0.95); }
     100% { transform: scale(1); }
 }
+
+/* 隱藏元素 */
+.hidden {
+    display: none;
+  }
+  
+  /* 置中 QR 區塊 */
+  .qr-section {
+    text-align: center;
+  }
+  
+  /* 下載區塊樣式 */
+  .download-section {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  
