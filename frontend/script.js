@@ -24,4 +24,35 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("Selected Strength:", value);
     });
 
+    function handleFileChange() {
+        previewContainer.innerHTML = ''; // 清除舊預覽
+        qrCodeSection.style.display = 'none'; // 隱藏 QR Code 區域
+
+        const files = fileInput.files; // 獲取多個文件
+        if (!files || files.length === 0) {
+            alert('Please upload at least one valid image file.');
+            return;
+        }
+
+        // 預覽每個選中的圖片
+        for (const file of files) {
+            if (!file.type.startsWith('image/')) {
+                alert(`File ${file.name} is not a valid image.`);
+                continue;
+            }
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const preview = document.createElement('div');
+                preview.classList.add('preview', 'fade-in');
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                preview.appendChild(img);
+                previewContainer.appendChild(preview);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        addConfirmButton();
+    }
+
 });
