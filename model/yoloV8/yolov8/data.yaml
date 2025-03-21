@@ -1,4 +1,0 @@
-train: C:\Users\ICMNLab1\Documents\yolov8\images\train
-val: C:\Users\ICMNLab1\Documents\yolov8\images\val
-nc: 1  
-names: ["human face"]
