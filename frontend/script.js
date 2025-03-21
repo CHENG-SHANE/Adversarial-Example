@@ -66,5 +66,44 @@ document.addEventListener('DOMContentLoaded', () => {
             strengthSliderSection.appendChild(confirmBtn);
         }
     }
+    
+    async function confirmEncryption() {
+        const files = fileInput.files;
+        if (!files || files.length === 0) {
+            alert("Please upload files before confirming encryption.");
+            return;
+        }
+
+        const formData = new FormData();
+        for (let i = 0; i < files.length; i++) {
+            formData.append('files', files[i]); // 添加每個文件
+        }
+        formData.append('strength', strengthSlider.value); // 添加加密強度參數
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/upload/`, { method: 'POST', body: formData });// 發送 POST 請求,內容為 formData
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error("Server error:", errorText);
+                throw new Error(`Server error: ${response.statusText}`);
+            }
+
+            // 接收後端回應
+            const responseJson = await response.json();
+            console.log("Response JSON:", responseJson);
+
+            // 檢查是否有處理後的圖片
+            const { processed_files } = responseJson;
+            if (!processed_files || processed_files.length === 0) {
+                throw new Error('No processed files returned from server.');
+            }
+
+            displayProcessedFiles(processed_files); // 顯示處理後的圖片
+        } catch (error) {
+            console.error("Encryption error:", error);
+            alert("An error occurred during encryption. Please check your connection and try again.");
+        }
+    }
+
 
 });
