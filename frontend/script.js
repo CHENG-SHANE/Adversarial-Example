@@ -54,5 +54,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         addConfirmButton();
     }
+    
+    // 添加確認按鈕
+    function addConfirmButton() {
+        if (!document.getElementById('confirm-btn')) {
+            const confirmBtn = document.createElement('button');
+            confirmBtn.classList.add('confirm-btn', 'stylish-btn');
+            confirmBtn.id = 'confirm-btn';
+            confirmBtn.textContent = 'Confirm Encryption';
+            confirmBtn.onclick = confirmEncryption;
+            strengthSliderSection.appendChild(confirmBtn);
+        }
+    }
 
 });
