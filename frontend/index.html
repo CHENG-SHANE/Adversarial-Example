@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adversarial Examples Encrypt</title>
+    <link rel="stylesheet" href="style.css"> <!-- 連結到 style.css -->
+</head>
+<body>
+
+    <!-- 幾何圖形背景裝飾 -->
+    <div class="background-shapes">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+        <div class="shape shape4"></div>
+    </div>
+
+    <!-- 導航欄 -->
+    <div class="navbar">
+        <div class="logo">AI Encryptor</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 標題區域 -->
+        <div class="header">
+            <h1>Adversarial Examples Encrypt</h1>
+            <p>Protect your portrait photos with AI-powered encryption to prevent misuse.</p>
+        </div>
+        
+        <!-- 上傳區域 -->
+        <div class="upload-section">
+            <label for="file-upload">Upload Photos</label>
+            <input type="file" id="file-upload" multiple class="hidden">
+            <button class="upload-btn" onclick="document.getElementById('file-upload').click();">Choose Files</button>
+        </div>
+
+        <!-- 預覽區域 -->
+        <div class="preview-container" id="preview-container"></div>
+        
+        <!-- 加密強度選擇區域 -->
+        <div class="strength-slider-section">
+            <label for="strength-slider">Strength:</label>
+            <input type="range" id="strength-slider" min="0.01" max="0.1" step="0.01" value="0.01">
+            <span id="strength-label">0.01</span>
+        </div>
+
+
+        <div id="qr-code-section" class="qr-section hidden">
+            <h2>Scan QR Code or Download image</h2>
+            <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+            <div id="qr-code-container"></div>
+        </div>
+        
+        <div id="download-section" class="download-section hidden">
+            <button class="download-btn" id="download-btn">Download</button>
+        </div>
+        
+        <div class="classification-results hidden" id="classification-results">
+            <h2>Classification Results</h2>
+            <div id="original-results">
+                <h3>Original Image Results</h3>
+                <ul></ul>
+            </div>
+            <div id="processed-results">
+                <h3>Processed Image Results</h3>
+                <ul></ul>
+            </div>
+        </div>
+
+
+
+        <!-- 隱私聲明 -->
+        <p class="privacy-notice">
+            Your photos are not stored or shared. They are encrypted and ready for download.
+        </p>
+    </div>
+
+    <script src="script.js"></script> <!-- 連結到 script.js -->
+</body>
+</html>
