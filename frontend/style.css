@@ -1,0 +1,252 @@
+/* 全局樣式 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* 背景樣式 */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #3b569f, #60298a);
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+    padding: 20px;
+    position: relative;
+    overflow: auto;
+}
+
+/* 幾何圖形背景裝飾 */
+.background-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.shape {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 50%;
+    animation: float 10s ease-in-out infinite;
+    opacity: 0.7;
+}
+
+.shape1 { width: 250px; height: 250px; top: 10%; left: 15%; animation-delay: 0s; }
+.shape2 { width: 180px; height: 180px; top: 70%; left: 70%; animation-delay: 2s; }
+.shape3 { width: 300px; height: 300px; top: 30%; left: 85%; animation-delay: 4s; }
+.shape4 { width: 120px; height: 120px; top: 50%; left: 25%; animation-delay: 6s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.navbar {
+    width: 100%;
+    background: linear-gradient(135deg, #3b569f, #60298a); /* 使用與頁面一致的漸層背景 */
+    padding: 15px 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 0 0 15px 15px;
+    z-index: 1000;
+}
+
+.navbar .logo {
+    font-weight: bold;
+    font-size: 24px;
+    color: #e0e7ff;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.navbar .nav-links li {
+    margin-left: 20px;
+}
+
+.navbar .nav-links li a {
+    color: #e0e7ff;
+    text-decoration: none;
+    transition: color 0.3s;
+    padding: 8px 15px;
+    border-radius: 8px;
+}
+
+.navbar .nav-links li a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #cbd5e1;
+}
+
+/* 主容器 */
+.container {
+    background: linear-gradient(145deg, #ffffff, #f0f1f5);
+    border-radius: 15px;
+    padding: 40px;
+    max-width: 700px;
+    width: 100%;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+    color: #333;
+    margin-top: 100px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    overflow: auto; 
+}
+
+/* 標題區域 */
+.header h1 {
+    font-size: 32px;
+    color: #1e3a8a;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+}
+
+.header p {
+    font-size: 16px;
+    color: #4a4a4a;
+    margin: 10px 0 20px;
+}
+
+/* 上傳區域 */
+.upload-section {
+    background-color: #f3f4f6;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #d1d5db;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: auto; 
+}
+
+.upload-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    background: linear-gradient(145deg, #1e40af, #364fb2);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0px 4px 15px rgba(30, 64, 175, 0.4);
+    transition: all 0.3s;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.upload-btn:hover {
+    background: linear-gradient(145deg, #2d5eff, #1d38b2);
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 20px rgba(45, 94, 255, 0.5);
+}
+
+/* 預覽區域 */
+.preview-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+    overflow-x: auto;
+    padding: 10px 0;
+}
+
+.preview {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    background-color: #e0e7ff;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.preview:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+/* 確定轉檔按鈕*/
+.stylish-btn {
+    background-color: #4CAF50; /* 綠色背景色 */
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 30px 0;
+    cursor: pointer;
+    border-radius: 8px; /* 圓角邊框 */
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0px 4px 15px rgba(30, 64, 175, 0.4);
+}
+
+.stylish-btn:hover {
+    background-color: #45a049; /* 當滑過時的背景色 */
+    transform: scale(1); /* 輕微放大效果 */
+    box-shadow: 0px 6px 12px rgba(45, 94, 255, 0.5);
+}
+
+.confirm-btn {
+    margin-left: 10px; /* 與滑動條保持適當間距 */
+}
+
+/* 隱私聲明 */
+.privacy-notice {
+    font-size: 12px;
+    margin-top: 15px;
+    color: #6b7280;
+}
+
+/* 淡入效果 */
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out forwards;
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 按鈕點擊動畫 */
+.click-animation {
+    animation: clickEffect 0.3s ease;
+}
+
+@keyframes clickEffect {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
