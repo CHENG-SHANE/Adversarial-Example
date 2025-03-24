@@ -56,4 +56,4 @@ for filename in os.listdir(image_folder):
         # 儲存處理後的圖片
         output_path = os.path.join(output_folder, filename.rsplit('.', 1)[0] + "_inverted.png")
         cv2.imwrite(output_path, img)
-        print(f"完成：{output_path}")
+        print(f"finish：{output_path}")
