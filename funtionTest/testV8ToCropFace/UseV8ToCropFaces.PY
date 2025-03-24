@@ -3,7 +3,7 @@ import os
 import cv2
 import numpy as np
 
-model_path = "D:/Adversarial Example/model/yoloV8/runs/detect/train6/weights/best.pt"              
+model_path = "D:/Adversarial-Example/model/yoloV8/runs/detect/train6/weights/best.pt"              
 image_folder = "funtionTest/testV8ToCropFace/V8CropPicture"  
 output_folder = "funtionTest/testV8ToCropFace/V8CropOutput"     
 target_class_id = 0 

@@ -21,10 +21,10 @@ transform = transforms.Compose([
 # 取得圖片的FaceNet嵌入向量
 def get_embedding(image_path):
     image = Image.open(image_path).convert("RGB")
-    image_tensor = transform(image).unsqueeze(0).to(device)  # 增加一個batch維度，並放置於GPU/CPU
+    image_tensor = transform(image).unsqueeze(0).to(device)
     with torch.no_grad():
-        embedding = model(image_tensor)  # 取得FaceNet嵌入向量
-    return embedding.cpu().numpy().flatten()  # 轉回CPU並展平成1D陣列
+        embedding = model(image_tensor)
+    return embedding.cpu().numpy().flatten()
 
 # 載入並回傳圖片
 def load_image(image_path):
@@ -34,7 +34,7 @@ def load_image(image_path):
 pairs = [(i, i+1) for i in range(1, 8, 2)]
 num_pairs = len(pairs)
 
-base_dir = r"D:\Adversarial-Example-Technology-for-Social-Media-Image-Privacy-Protection-Project\funtionTest"
+base_dir = r"D:\Adversarial-Example\funtionTest\testFaceNet"
 pairs = [(i, i+1) for i in range(1, 8, 2)]
 num_pairs = len(pairs)
 

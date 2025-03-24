@@ -3,21 +3,17 @@ import os
 import cv2
 import numpy as np
 
-# 路徑設定
 model_path = "D:/Adversarial-Example/model/yoloV8/runs/detect/train6/weights/best.pt"
 image_folder = "D:/Adversarial-Example/funtionTest/corpandpast/cropAndPastPicture"
 output_folder = "D:/Adversarial-Example/funtionTest/corpandpast/cropAndPastOutput"
 cropped_faces_folder = "D:/Adversarial-Example/funtionTest/corpandpast/cropOnlyFace"
 target_class_id = 0
 
-# 建立資料夾
 os.makedirs(output_folder, exist_ok=True)
 os.makedirs(cropped_faces_folder, exist_ok=True)
 
-# 載入模型
 model = YOLO(model_path)
 
-# 處理圖片
 for filename in os.listdir(image_folder):
     if filename.lower().endswith((".jpg", ".jpeg", ".png")):
         img_path = os.path.join(image_folder, filename)
@@ -56,4 +52,4 @@ for filename in os.listdir(image_folder):
         # 儲存處理後的圖片
         output_path = os.path.join(output_folder, filename.rsplit('.', 1)[0] + "_inverted.png")
         cv2.imwrite(output_path, img)
-        print(f"完成：{output_path}")
+        print(f"finish：{output_path}")
