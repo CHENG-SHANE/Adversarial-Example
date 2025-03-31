@@ -73,72 +73,77 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("Please upload files before confirming encryption.");
             return;
         }
-
+    
         const formData = new FormData();
         for (let i = 0; i < files.length; i++) {
-            formData.append('files', files[i]); // 添加每個文件
+            formData.append('files', files[i]);
         }
-        formData.append('strength', strengthSlider.value); // 添加加密強度參數
-
+        formData.append('strength', strengthSlider.value);
+    
         try {
-            const response = await fetch(`${API_BASE_URL}/upload/`, { method: 'POST', body: formData });// 發送 POST 請求,內容為 formData
+            const response = await fetch(`${API_BASE_URL}/upload/`, { method: 'POST', body: formData });
             if (!response.ok) {
                 const errorText = await response.text();
                 console.error("Server error:", errorText);
                 throw new Error(`Server error: ${response.statusText}`);
             }
-
-            // 接收後端回應
+    
             const responseJson = await response.json();
             console.log("Response JSON:", responseJson);
-
-            // 檢查是否有處理後的圖片
-            const { processed_files } = responseJson;
+    
+            const { processed_files, confidences } = responseJson;
             if (!processed_files || processed_files.length === 0) {
                 throw new Error('No processed files returned from server.');
             }
-
-            displayProcessedFiles(processed_files); // 顯示處理後的圖片
+    
+            // 明確將 confidences 傳入
+            displayProcessedFiles(processed_files, confidences);
+    
         } catch (error) {
             console.error("Encryption error:", error);
             alert("An error occurred during encryption. Please check your connection and try again.");
         }
     }
-
-    function displayProcessedFiles(filenames) {
+    
+    function displayProcessedFiles(filenames, confidences) {
         uploadSection.style.display = 'none';
         strengthSliderSection.style.display = 'none';
-
+    
         previewContainer.innerHTML = '';
         qrCodeContainer.innerHTML = '';
-
+    
         qrCodeSection.style.display = 'block';
-
-        // 生成 QR Code
-        filenames.forEach((filename) => {
+    
+        filenames.forEach((filename, index) => {
             const fileUrl = `${API_BASE_URL}/download/${encodeURIComponent(filename)}`;
-            console.log('Generating QR Code for:', fileUrl);
+            qrCodeContainer.appendChild(document.createElement('br'));
+            // 顯示信心值
+            const confidenceText = document.createElement('p');
+            confidenceText.textContent = `FaceNet Confidence: ${(confidences[index] * 100).toFixed(2)}%`;
+            confidenceText.style.fontWeight = 'bold';
+            confidenceText.style.color = '#FF7744';
+            qrCodeContainer.appendChild(confidenceText);
 
+            // 生成 QR Code
             const qrCanvas = document.createElement('canvas');
             qrCodeContainer.appendChild(qrCanvas);
-
+    
             QRCode.toCanvas(qrCanvas, fileUrl, (error) => {
                 if (error) {
-                    console.error('QR Code generation failed for URL:', fileUrl, error);
+                    console.error('QR Code generation failed:', fileUrl, error);
                     alert(`Failed to generate QR Code for: ${fileUrl}`);
-                } else {
-                    console.log('QR Code generated successfully for URL:', fileUrl);
                 }
             });
-
+    
             // 加入下載按鈕
             const downloadBtn = document.createElement('a');
             downloadBtn.textContent = `Download ${filename}`;
             downloadBtn.href = fileUrl;
-            downloadBtn.download = true;
+            downloadBtn.download = filename;
             downloadBtn.classList.add('stylish-btn');
             qrCodeContainer.appendChild(downloadBtn);
 
+    
             qrCodeContainer.appendChild(document.createElement('br'));
         });
     }
